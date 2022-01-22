@@ -1,0 +1,26 @@
+﻿@model ICollection<Domain.Enities.Movie>
+@{
+    ViewData["Title"] = "Фильмы";
+}
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th>Бюджет (в долларах)</th>
+            <th>Режиссёр</th>
+            <th></th>
+        </tr>
+        @foreach (var movie in @Model)
+        {
+            <tr>
+                <td>@movie.Name</td>
+                <td>@movie.Budget</td>
+                <td>@movie.Director.Name</td>
+                <td><a asp-controller="Movie" asp-action="Info" asp-route-id="@movie.Id">Подробности</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+<p><a asp-controller="Movie" asp-action="Create">Создать</a></p>
+</div>

@@ -1,0 +1,39 @@
+﻿@model Domain.Enities.Director
+@{
+    ViewData["Title"] = "Информация о режиссёре";
+}
+
+<div class = "container">
+    @{
+        
+    <table class="table">
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Пол</th>
+            <th>Фильмы</th>
+        </tr>
+        <tr>
+            <td>@Model.Name</td>
+            <td>@Model.Birth.ToShortDateString()</td>
+            <td>@Model.Gender.Name</td>
+            @if (!Model.Movies.Any())
+            {
+                <td>Не снимал фильмы</td>
+            }
+            else
+            {
+                <td>
+                @foreach(var movie in Model.Movies)
+                {
+                    @movie.Name<br />     
+                }
+                </td>
+            }
+        </tr>  
+    </table>
+    <p><a asp-controller="Director" asp-action="Update" asp-route-id="@Model.Id">Редактировать</a></p>
+    <p><a asp-controller="Director" asp-action="DeletionAttempt" asp-route-id="@Model.Id"  class="text-danger">Удалить</a></p>
+    <p><a asp-controller="Director" asp-action="Index" asp-route-id="@Model.Id">Вернуться к списку режиссёров</a></p>
+    }
+</div>

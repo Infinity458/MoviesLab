@@ -1,0 +1,43 @@
+﻿@model MoviesLab.Models.ActorModels.CreateActorModel
+@{
+    ViewData["Title"] = "Создание актёра";
+}
+
+<div class="container">
+    <form asp-controller="Actor">      
+        <div class="form-group">
+            <label>Полное имя</label>
+            <input asp-for="@Model.Name" maxlength="35" size="40" placeholder="Введите полное имя" autofocus autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Дата рождения</label>
+            <input asp-for="@Model.Birth" maxlength="20" size="22" autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Birth"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Родной город</label>
+            @Html.DropDownListFor(e => e.CityId, Model.AvailableCities, new { @class = "dropDown" })
+        </div>
+
+        <div class="form-group">
+            <label>Пол</label>
+            @Html.DropDownListFor(e => e.GenderId, Model.AvailableGenders, new { @class = "dropDown" })
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" asp-action="CreateFromModel" formmethod="post"
+                           class="btn btn-outline-success" value="Сохранить" />
+                </td>
+                <td>
+                    <input type="submit" asp-action="Index" formmethod="get" formnovalidate
+                           class="btn btn-outline-dark" value="Отмена" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

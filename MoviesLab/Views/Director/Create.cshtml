@@ -1,0 +1,38 @@
+﻿@model MoviesLab.Models.DirectorModels.CreateDirectorModel
+@{
+    ViewData["Title"] = "Создание режиссёра";
+}
+
+<div class="container">
+    <form asp-controller="Director">      
+        <div class="input-block">
+            <label>Полное имя</label>
+            <input asp-for="@Model.Name" maxlength="35" size="40" placeholder="Введите полное имя" autofocus autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Name"></span>
+        </div>
+
+        <div class="input-block">
+            <label>Дата рождения</label>
+            <input asp-for="@Model.Birth" maxlength="20" size="22" autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Birth"></span>
+        </div>
+
+        <div class="input-block">
+            <label>Пол</label>
+            @Html.DropDownListFor(e => e.GenderId, Model.AvailableGenders, new { @class = "dropDown" })
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" asp-action="CreateFromModel" formmethod="post"
+                           class="btn btn-outline-success" value="Сохранить" />
+                </td>
+                <td>
+                    <input type="submit" asp-action="Index" formmethod="get" formnovalidate
+                           class="btn btn-outline-dark" value="Отмена" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

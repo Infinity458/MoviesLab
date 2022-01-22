@@ -1,0 +1,84 @@
+﻿@model MoviesLab.Models.MovieModels.CreateMovieModel
+@{
+    ViewData["Title"] = "Создание фильма";
+}
+
+<style>
+    .dropDown { width: 300px; }
+</style>
+
+<div class="container">
+    <form asp-controller="Movie">      
+        <div class="input-block">
+            <label>Название</label>
+            <input asp-for="@Model.Name" maxlength="35" size="40" placeholder="Введите название фильма" autofocus autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Name"></span>
+        </div>
+
+        <div class="input-block">
+            <label>Бюджет (в долларах)</label>
+            <input asp-for="@Model.Budget" maxlength="20" size="22" placeholder="Введите бюжет фильма" autocomplete="off" />
+            <span class="error-message" asp-validation-for="@Model.Budget"></span>
+        </div>
+
+        @if (Model.AvailableDirectors.Any())
+        {
+        <div class="input-block">
+            <label>Режиссёр</label>
+            @Html.DropDownListFor(e => e.DirectorId, Model.AvailableDirectors, new { @class = "dropDown" })
+        </div>
+        }
+
+        @if (Model.AvailableGenres.Any())
+        {
+        <div class="input-block">
+            <label>Жанр</label>
+            @Html.DropDownListFor(e => e.GenreId, Model.AvailableGenres, new { @class = "dropDown" })
+        </div>
+        }
+
+        @if (Model.AvailableProductionCompanies.Any())
+        {
+        <div class="input-block">
+            <label>Кинокомпания</label>
+            @Html.DropDownListFor(e => e.ProductionCompanyId, Model.AvailableProductionCompanies, new { @class = "dropDown" })
+        </div>
+        }
+
+        @if (Model.AvailableActors.Any())
+        {
+        <div class="input-block">
+            <label>Актёры</label>
+            @Html.ListBoxFor(e => e.ActorFilter.Ids, Model.AvailableActors, new { @class = "dropDown", multiple="true" })
+        </div>
+        }  
+
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" asp-action="CreateFromModel" formmethod="post"
+                           class="btn btn-outline-success" value="Сохранить" />
+                </td>
+                <td>
+                    <input type="submit" asp-action="Index" formmethod="get" formnovalidate
+                           class="btn btn-outline-dark" value="Отмена" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(function () {
+            $('.dropDown').select2();
+        });
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@model ICollection<Domain.Enities.Director>
+@{
+    ViewData["Title"] = "Режиссёры";
+}
+
+<div class ="container">
+    <table class="table">
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th></th>
+        </tr>
+        @foreach (var director in @Model)
+        {
+            <tr>
+                <td>@director.Name</td>
+                <td>@director.Birth.ToShortDateString()</td>
+                <td><a asp-controller="Director" asp-action="Info" asp-route-id="@director.Id">Подробности</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+<p><a asp-controller="Director" asp-action="Create">Создать</a></p>
+</div>

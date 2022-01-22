@@ -1,0 +1,22 @@
+﻿@model Domain.Enities.Movie
+@{ ViewData["Title"] = "Подтверждение удаления"; }
+
+<div class="container">
+    <div class="info-block"><a class="info-header">Название</a> @Model.Name</div>
+    <div class="info-block"><a class="info-header">Режиссёр</a> @Model.Director.Name</div>
+
+    <table>
+        <tr>
+            <td>
+                <form method="get" asp-controller="Movie" asp-action="Delete" asp-route-id="@Model.Id">
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+            </td>
+            <td>
+                <form method="get" asp-controller="Movie" asp-action="Index">
+                    <button type="submit" class="btn btn-outline-dark">Отмена</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

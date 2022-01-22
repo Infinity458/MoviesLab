@@ -1,0 +1,22 @@
+﻿@model Domain.Enities.Actor
+@{ ViewData["Title"] = "Подтверждение удаления"; }
+
+<div class="container">
+    <div class="info-block"><a class="info-header">Полное имя</a> @Model.Name</div>
+    <div class="info-block"><a class="info-header">Дата рождения</a> @Model.Birth.ToShortDateString()</div>
+
+    <table>
+        <tr>
+            <td>
+                <form method="get" asp-controller="Director" asp-action="Delete" asp-route-id="@Model.Id">
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+            </td>
+            <td>
+                <form method="get" asp-controller="Director" asp-action="Index">
+                    <button type="submit" class="btn btn-outline-dark">Отмена</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

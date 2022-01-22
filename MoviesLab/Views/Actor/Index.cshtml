@@ -1,0 +1,26 @@
+﻿@model ICollection<Domain.Enities.Actor>
+@{
+    ViewData["Title"] = "Актёры";
+}
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Страна рождения</th>
+            <th></th>
+        </tr>
+        @foreach (var actor in @Model)
+        {
+            <tr>
+                <td>@actor.Name</td>
+                <td>@actor.Birth.ToShortDateString()</td>
+                <td>@actor.City.Country.Name</td>
+                <td><a asp-controller="Actor" asp-action="Info" asp-route-id="@actor.Id">Подробности</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+<p><a asp-controller="Actor" asp-action="Create">Создать</a></p>
+</div>

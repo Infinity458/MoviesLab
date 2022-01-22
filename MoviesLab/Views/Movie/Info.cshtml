@@ -1,0 +1,34 @@
+﻿    @model Domain.Enities.Movie
+@{
+    ViewData["Title"] = "Информация о фильме";
+}
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th>Бюджет (в долларах)</th>
+            <th>Режиссёр</th>
+            <th>Жанр</th>
+            <th>Актёры</th>
+        </tr>
+        <tr>
+            <td>@Model.Name</td>
+            <td>@Model.Budget</td>
+            <td>@Model.Director.Name</td>
+            <td>@Model.Genre.Name</td>
+            <td>
+            @if (Model.Actors.Any())
+            {
+                @foreach (var actor in Model.Actors)
+                {
+                    @actor.Name<br />  
+                }
+            }
+            </td>
+        </tr>  
+    </table>
+    <p><a asp-controller="Movie" asp-action="Update" asp-route-id="@Model.Id">Редактировать</a></p>
+    <p><a asp-controller="Movie" asp-action="DeletionAttempt" asp-route-id="@Model.Id" class="text-danger">Удалить</a></p>
+    <p><a asp-controller="Movie" asp-action="Index" asp-route-id="@Model.Id">Вернуться к списку фильмов</a></p>
+</div>
